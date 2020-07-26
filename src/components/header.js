@@ -15,6 +15,8 @@ const Header = () => {
                     <ButtonGroup className="mb-1">
                         <LinkContainer variant="outline-warning" to="/blog"><Button >Blog</Button></LinkContainer>
                         <LinkContainer variant="outline-warning" to="/about"><Button >About</Button></LinkContainer>
+                        <LinkContainer variant="outline-warning" to="/login"><Button >Login</Button></LinkContainer>
+                        <LinkContainer variant="outline-warning" to="/admin"><Button >Admin</Button></LinkContainer>
                     </ButtonGroup>
 
 

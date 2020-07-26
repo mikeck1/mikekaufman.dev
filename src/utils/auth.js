@@ -1,7 +1,8 @@
-import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom'
 
+import { useHistory, useLocation } from 'react-router-dom'
+import React from 'react';
 import db, { GoogleSignOn } from './firebase'
+
 import Cookies from 'universal-cookie'
 
 import request from './request'
@@ -34,10 +35,17 @@ export const AuthProvider = (props) => {
 
             return db.auth().currentUser.getIdToken()
         }).then(token => {
+            console.log("LOGGING IN" + token)
+            const expiresIn = 60 * 60 * 24 * 1000 * 14;
+            const options = { maxAge: expiresIn, httpOnly: false, secure: false };
+
             if (token) {
+                // cookies.set('sessionCookie', token, options)
+                history.push({ pathname: '/admin', user: { token } })
                 return serverLogin(token)
             }
         }).catch(error => {
+            console.log("Error Logging in!")
             console.log(error)
         })
     }
@@ -49,6 +57,7 @@ export const AuthProvider = (props) => {
     }
 
     const serverLogin = React.useCallback(credential => {
+        console.log("Hi")
         const body = { credential }
         request('/api/user/login', { body }, true).then(response => {
             const { body, headers } = response
@@ -56,7 +65,8 @@ export const AuthProvider = (props) => {
             setUser(body)
             if (location.pathname === '/login') {
                 if (newUser) {
-                    history.push({ pathname: "/profile", state: { newUser } })
+                    // went to admin panel
+                    history.push({ pathname: "/", state: { newUser } })
                 } else {
                     history.push('/')
                 }
