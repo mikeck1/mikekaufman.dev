@@ -31,7 +31,6 @@ function Admin() {
     if (localPost === null) {
         if (post !== null)
             updateLocalPost(post)
-
     }
 
     React.useEffect(() => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../components/header";
 import { Jumbotron, Image } from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap'
 import 'firebase/firestore';
 import db from '../utils/firebase';
 
@@ -33,21 +34,24 @@ function Posts() {
             <Header />
             <Jumbotron>
                 {posts.map(post => (
-                    <div style={{ textAlign: "center", marginTop: "50px" }}>
-                        <Image src={post.image} fluid rounded /><br></br>
-                        {post.id}<br></br>
-                        {post.title}
+                    <LinkContainer to={"/blog/" + post.id} >
+                        < div style={{ textAlign: "center", marginTop: "50px" }}>
+                            <Image src={post.image} fluid rounded /><br></br>
+                            {post.id}<br></br>
+                            {post.title}
 
-                        {/* <li key={post.title}>{post.title}</li>
+                            {/* <li key={post.title}>{post.title}</li>
                     {post.body} */}
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: post.body
-                            }}></div>
-                        {/* <PostInput post={post} /> */}
-                    </div>
-                ))}
-            </Jumbotron>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: post.body
+                                }}></div>
+                            {/* <PostInput post={post} /> */}
+                        </div></LinkContainer>
+
+                ))
+                }
+            </Jumbotron >
 
         </>
     );
