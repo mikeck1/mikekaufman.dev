@@ -11,6 +11,7 @@ import Login from "./pages/login";
 import Blog from "./pages/blog";
 import Admin from "./pages/admin";
 import BlogArticle from "./components/blog-article";
+import ProjectPage from "./pages/projectPage";
 
 const Router = () => {
 
@@ -24,6 +25,7 @@ const Router = () => {
                         <Route path="/about" exact component={About}></Route>
                         <Route path="/login" exact component={Login}></Route>
                         <Route path="/blog/:blogID" component={BlogArticle} />
+                        <Route path="/projects/:projectID" component={ProjectPage} />
                         <PrivateRoute path="/admin" exact component={Admin} />
                     </Switch>
                 </div >

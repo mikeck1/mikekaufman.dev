@@ -6,8 +6,8 @@ import TableTile from "./tableTile";
 
 
 const Responsive_table = (props) => {
-    const friends = props.friends;
-    const FriendTable = friends.map(note => {
+    const projects = props.projects;
+    const FriendTable = projects.map(note => {
         return (
             <Col
                 xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 4 }}
@@ -21,7 +21,7 @@ const Responsive_table = (props) => {
     return (
         <div style={{ marginLeft: "50px", marginRight: "50px" }}>
             <br></br>
-            {/* <Filter props={friends} /> */}
+            {/* <Filter props={projects} /> */}
             <table className="table" >
                 <tbody >
                     <Row gutter={40}>

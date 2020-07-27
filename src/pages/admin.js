@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from "../components/header";
-import { Jumbotron, Image, Form, Button, Toast } from "react-bootstrap";
+import { Jumbotron, Image, Form, Button, Toast, Accordion, Card } from "react-bootstrap";
 import 'firebase/firestore';
 import db from '../utils/firebase';
 import { PostInput } from '../components/PostInput';
+import AddProject from "../components/addProject"
 import RichTextEditor from 'react-rte';
 
 function Admin() {
@@ -20,7 +21,7 @@ function Admin() {
         setEditorValue(value);
         setPost(value.toString("html"));
         console.log(value._cache.html)
-        updateLocalPost({ ...localPost, body: value._cache.html })
+        _updateLocalPost({ ...localPost, body: value._cache.html })
     };
 
     const updateLocalPost = u => {
@@ -51,57 +52,81 @@ function Admin() {
     return (
         <>
             <Header />
-            <Jumbotron>
-                <Button style={{ marginBottom: "40px" }} onClick={() => db.auth().signOut()}>Sign out</Button>
-                <Form onSubmit={onCreate}>
-                    <Form.Group controlId="formBasicTitle">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control type="title" placeholder="Enter title" value={localPost.title} onChange={e => updateLocalPost({ ...localPost, title: e.target.value })} />
-                    </Form.Group>
+            <Accordion >
+                <Card>
+                    <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                            Add a new Post
+                </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                            <Jumbotron>
+                                <Form onSubmit={onCreate}>
+                                    <Form.Group controlId="formBasicTitle">
+                                        <Form.Label>Title</Form.Label>
+                                        <Form.Control type="title" placeholder="Enter title" value={localPost.title} onChange={e => updateLocalPost({ ...localPost, title: e.target.value })} />
+                                    </Form.Group>
 
-                    <Form.Group controlId="formBasicBody">
-                        <Form.Label>Body</Form.Label>
-                        <RichTextEditor
-                            value={editorValue}
-                            onChange={handleChange}
-                            required
-                            id="body-text"
-                            name="bodyText"
-                            type="string"
-                            multiline
-                            variant="filled"
-                            style={{ minHeight: 410 }}
-                        />
-                        {/* <Form.Control as="textarea" type="body" rows="10" placeholder="Body of Post" value={localPost.body} onChange={e => updateLocalPost({ ...localPost, body: e.target.value })} />
-                        <Form.Text className="text-muted">
-                            This takes HTML
-                        </Form.Text> */}
-                    </Form.Group>
-                    <Form.Group controlId="formBasicTitle">
-                        <Form.Label>Image URL</Form.Label>
-                        <Form.Control type="title" placeholder="Enter image URL" value={localPost.image} onChange={e => updateLocalPost({ ...localPost, image: e.target.value })} />
-                        <Form.Text className="text-muted">
-                            This takes an http:// ... .png, .jpg, etc.
+                                    <Form.Group controlId="formBasicBody">
+                                        <Form.Label>Body</Form.Label>
+                                        <RichTextEditor
+                                            value={editorValue}
+                                            onChange={handleChange}
+                                            required
+                                            id="body-text"
+                                            name="bodyText"
+                                            type="string"
+                                            multiline
+                                            variant="filled"
+                                            style={{ minHeight: 410 }}
+                                        />
+                                        <Form.Control as="textarea" type="body" rows="10" placeholder="Body of Post" value={localPost.body} onChange={e => updateLocalPost({ ...localPost, body: e.target.value })} />
+                                        <Form.Text className="text-muted">
+                                            This takes HTML
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Form.Group controlId="formBasicTitle">
+                                        <Form.Label>Image URL</Form.Label>
+                                        <Form.Control type="title" placeholder="Enter image URL" value={localPost.image} onChange={e => updateLocalPost({ ...localPost, image: e.target.value })} />
+                                        <Form.Text className="text-muted">
+                                            This takes an http:// ... .png, .jpg, etc.
                         </Form.Text>
-                    </Form.Group>
-                    <Button variant="primary" className="save" onClick={onCreate}>
-                        Submit
-                    </Button>
-                </Form>
+                                    </Form.Group>
+                                    <Button variant="primary" className="save" onClick={onCreate}>
+                                        Submit
+                                    </Button>
+                                </Form>
+                            </Jumbotron>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+                <Card>
+                    <Card.Header>
+                        <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                            Add a new Project
+                        </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="1">
+                        <Card.Body>
+                            <AddProject />
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            </Accordion>
+            <hr />
+            <div style={{ textAlign: "right" }}>
+                <Button variant="secondary" style={{ marginRight: "15px" }} size="sm" onClick={() => db.auth().signOut()}>Sign out</Button>
+            </div>
+            <hr />
+            <Jumbotron>
+
                 {/* <input /> */}
                 {posts.map(post => (
                     <div style={{ marginTop: "50px" }}>
                         <Image src={post.image} fluid rounded /><br></br>
-                        {post.id}<br></br>
-                        {post.title}
-
-                        {/* <li key={post.title}>{post.title}</li>
-                    {post.body} */}
-                        <Toast
-                            dangerouslySetInnerHTML={{
-                                __html: "<div>" + post.body + "</div>"
-                            }}></Toast>
                         <PostInput post={post} />
+                        <hr />
                     </div>
                 ))}
             </Jumbotron>

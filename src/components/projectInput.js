@@ -2,7 +2,7 @@ import React from 'react'
 import RichTextEditor from 'react-rte';
 import db from "../utils/firebase"
 import { Button, Jumbotron, Form } from "react-bootstrap"
-export const PostInput = ({ post }) => {
+export const ProjectInput = ({ post }) => {
     const [title, setTitle] = React.useState(post.title)
     const onUpdate = () => {
         db.firestore().collection("posts").doc(post.id).set({ ...post, title })
@@ -39,7 +39,7 @@ export const PostInput = ({ post }) => {
         const dbb = db.firestore()
         console.log(localProject)
         const b = localProject.body
-        dbb.collection('posts').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id })
+        dbb.collection('projects').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id })
     }
 
     return (
@@ -87,3 +87,28 @@ export const PostInput = ({ post }) => {
         </>
     );
 };
+
+
+
+
+
+// import React from 'react'
+// import db from "../utils/firebase"
+// import { Button } from "react-bootstrap"
+// export const ProjectInput = ({ project }) => {
+//     const [title, setTitle] = React.useState(project.title)
+//     const onUpdateTitle = () => {
+//         db.firestore().collection("projects").doc(project.id).set({ ...project, title })
+//     }
+
+//     const onDelete = () => {
+//         db.firestore().collection("projects").doc(project.id).delete()
+//     }
+//     return (
+//         <>
+//             <input value={title} onChange={(e) => { setTitle(e.target.value) }} />
+//             <Button onClick={onUpdateTitle}>Update</Button>
+//             <Button onClick={onDelete}>Delete</Button>
+//         </>
+//     );
+// };

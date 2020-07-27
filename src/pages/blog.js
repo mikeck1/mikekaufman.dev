@@ -32,26 +32,25 @@ function Posts() {
     return (
         <>
             <Header />
-            <Jumbotron>
-                {posts.map(post => (
-                    <LinkContainer to={"/blog/" + post.id} >
-                        < div style={{ textAlign: "center", marginTop: "50px" }}>
-                            <Image src={post.image} fluid rounded /><br></br>
-                            {post.id}<br></br>
-                            {post.title}
+            {posts.map(post => (
+                <Jumbotron>
+                    < div style={{ marginTop: "50px" }}>
+                        <h1 style={{ textAlign: "center" }}>{post.title}</h1>
+                        <div style={{ textAlign: "center" }}>
+                            <LinkContainer to={"/blog/" + post.id} ><Image src={post.image} fluid rounded /></LinkContainer><br></br>
+                        </div>
+                        <div
+                            style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
+                            dangerouslySetInnerHTML={{
+                                __html: post.body
+                            }}></div>
+                        {/* <PostInput post={post} /> */}
 
-                            {/* <li key={post.title}>{post.title}</li>
-                    {post.body} */}
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: post.body
-                                }}></div>
-                            {/* <PostInput post={post} /> */}
-                        </div></LinkContainer>
+                    </div>
+                </Jumbotron >
+            ))
+            }
 
-                ))
-                }
-            </Jumbotron >
 
         </>
     );

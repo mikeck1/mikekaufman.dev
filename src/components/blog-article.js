@@ -1,6 +1,6 @@
 import React from 'react';
 import db from '../utils/firebase';
-import { Image } from 'react-bootstrap';
+import { Image, Jumbotron } from 'react-bootstrap';
 import Header from "../components/header";
 const BlogArticle = ({ match, location }) => {
     const blogID = match.params.blogID;
@@ -15,22 +15,26 @@ const BlogArticle = ({ match, location }) => {
         fetchData()
     }, [setPosts, blogID])
     return (
-        <div>
+        <div style={{ width: "100%" }}>
             <Header />
-
-            <div style={{ textAlign: "center", marginTop: "50px" }}>
-                <Image src={posts.image} fluid rounded /><br></br>
-                {posts.id}<br></br>
-                {posts.title}
-
-                {/* <li key={post.title}>{post.title}</li>
+            <Jumbotron>
+                <div style={{ marginTop: "20px" }}>
+                    <hr />
+                    <h1 style={{ textAlign: "center" }}>{posts.title}</h1>
+                    <hr />
+                    <div style={{ textAlign: "center" }}>
+                        <Image style={{ textAlign: "center" }} src={posts.image} fluid rounded />
+                    </div><br></br>
+                    {/* <li key={post.title}>{post.title}</li>
                     {post.body} */}
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: posts.body
-                    }}></div>
-                {/* <PostInput post={post} /> */}
-            </div>
+                    <div style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
+                        dangerouslySetInnerHTML={{
+                            __html: posts.body
+                        }}></div>
+                    {/* <PostInput post={post} /> */}
+                </div>
+            </Jumbotron>
+
 
         </div>
     )
