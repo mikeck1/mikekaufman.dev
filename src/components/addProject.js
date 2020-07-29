@@ -1,10 +1,13 @@
 import React from 'react';
-import Header from "../components/header";
-import { Jumbotron, Image, Form, Button, Toast, Accordion, Card } from "react-bootstrap";
+import { Jumbotron, Image, Form, Button } from "react-bootstrap";
 import 'firebase/firestore';
 import db from '../utils/firebase';
 import { ProjectInput } from '../components/projectInput';
 import RichTextEditor from 'react-rte';
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 
 function AddProject() {
     const [projects, setProjects] = React.useState([])
@@ -12,8 +15,10 @@ function AddProject() {
     const [project, setProject] = React.useState()
     const [localProject, _updateLocalProject] = React.useState(0)
 
+    // const [editorState, setEditor] = React.useState()
+    let editorState = EditorState.createEmpty()
 
-    const [editorValue, setEditorValue] =
+    const [editorValue, _setEditorValue] =
         React.useState(RichTextEditor.createValueFromString(localProject.body, 'html'));
 
     const handleChange = value => {
@@ -25,6 +30,11 @@ function AddProject() {
 
     const updateLocalPost = u => {
         _updateLocalProject(u)
+        console.log(u)
+    }
+
+    const setEditorValue = u => {
+        _setEditorValue(u)
         console.log(u)
     }
 
@@ -45,9 +55,26 @@ function AddProject() {
     const onCreate = () => {
         const dbb = db.firestore()
         console.log(localProject)
-        dbb.collection('projects').add({ title: localProject.title, image: localProject.image, body: localProject.body })
+        dbb.collection('projects').add({ title: localProject.title, image: localProject.image, body: draftToHtml(convertToRaw(editorState.getCurrentContent())), timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
 
+    const onEditorStateChange = e_state => {
+        const timestamp = Date.now();
+        // this.props.onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+        const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
+        // console.log({ title: "mkkj", image: "kl", body: draftToHtml(convertToRaw(editorState.getCurrentContent())), timestamp: timestamp, timestamp_pretty: dt_pretty });
+        console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+        // console.log(draftToHtml(editorState))
+        editorState = e_state;
+
+    };
+
+    const timestamp = Date.now();
+    console.log(timestamp)
+    const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
+
+    // const date_pretty = dt_pretty.substring(0, 10);
+    // const time_pretty = dt_pretty.substring(13, 23);
     return (
         <>
             <Jumbotron>
@@ -58,7 +85,12 @@ function AddProject() {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicBody">
-                        <Form.Label>Body</Form.Label>
+                        {/* <Form.Label>Body</Form.Label>
+                        <Editor
+                            wrapperClassName="demo-wrapper"
+                            editorClassName="demo-editor"
+                            onEditorStateChange={onEditorStateChange}
+                        /> */}
                         <RichTextEditor
                             value={editorValue}
                             onChange={handleChange}
@@ -70,6 +102,7 @@ function AddProject() {
                             variant="filled"
                             style={{ minHeight: 410 }}
                         />
+
                         {/* <Form.Control as="textarea" type="body" rows="10" placeholder="Body of Post" value={localPost.body} onChange={e => updateLocalPost({ ...localPost, body: e.target.value })} />
                                         <Form.Text className="text-muted">
                                             This takes HTML

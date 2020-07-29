@@ -3,10 +3,10 @@ import RichTextEditor from 'react-rte';
 import db from "../utils/firebase"
 import { Button, Jumbotron, Form } from "react-bootstrap"
 export const PostInput = ({ post }) => {
-    const [title, setTitle] = React.useState(post.title)
-    const onUpdate = () => {
-        db.firestore().collection("posts").doc(post.id).set({ ...post, title })
-    }
+    // const [title, setTitle] = React.useState(post.title)
+    // const onUpdate = () => {
+    //     db.firestore().collection("posts").doc(post.id).set({ ...post, title })
+    // }
 
     const onDelete = () => {
         db.firestore().collection("posts").doc(post.id).delete()
@@ -38,9 +38,13 @@ export const PostInput = ({ post }) => {
     const onCreate = () => {
         const dbb = db.firestore()
         console.log(localProject)
-        const b = localProject.body
-        dbb.collection('posts').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id })
+        dbb.collection('posts').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
+
+    const timestamp = Date.now();
+    console.log(timestamp)
+    const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
+
 
     return (
         <>

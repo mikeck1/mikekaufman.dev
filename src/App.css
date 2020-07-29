@@ -28,3 +28,44 @@
 .App-link {
   color: #61dafb;
 }
+
+
+/* Create three equal columns that floats next to each other */
+.columnA {
+  width: 20%;
+  background-color: mintcream;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.main-column {
+  width: 60%;
+}
+
+.main-article-column {
+  width: 60%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  position: flex;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+
+/* 
+div h1 {
+  color: #999;
+  font-family: 'Hoefler Text', Georgia, serif;
+  font-style: bold;
+  text-align: center;
+  font-size: 200px;
+} */

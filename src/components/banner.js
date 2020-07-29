@@ -10,7 +10,6 @@ const jumboStyle = {
 
 }
 const imageStyle = {
-
     width: "250px", height: "230px"
 }
 function Banner() {

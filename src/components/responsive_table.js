@@ -10,9 +10,9 @@ const Responsive_table = (props) => {
     const FriendTable = projects.map(note => {
         return (
             <Col
-                xs={{ span: 12 }} sm={{ span: 6 }} md={{ span: 4 }}
-                lg={{ span: 4 }} xl={{ span: 3 }} key={note.id}>
-                <center><TableTile user={note} /></center>
+                xs={{ span: 12 }} sm={{ span: 12 }} md={{ span: 6 }}
+                lg={{ span: 6 }} xl={{ span: 4 }} key={note.id}>
+                <TableTile user={note} />
             </Col>
         );
     });

@@ -17,26 +17,41 @@ const BlogArticle = ({ match, location }) => {
     return (
         <div style={{ width: "100%" }}>
             <Header />
-            <Jumbotron>
-                <div style={{ marginTop: "20px" }}>
-                    <hr />
-                    <h1 style={{ textAlign: "center" }}>{posts.title}</h1>
-                    <hr />
-                    <div style={{ textAlign: "center" }}>
-                        <Image style={{ textAlign: "center" }} src={posts.image} fluid rounded />
-                    </div><br></br>
-                    {/* <li key={post.title}>{post.title}</li>
-                    {post.body} */}
-                    <div style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
-                        dangerouslySetInnerHTML={{
-                            __html: posts.body
-                        }}></div>
-                    {/* <PostInput post={post} /> */}
+            <div style={{ width: "95%", marginTop: "40px" }}>
+                <div class="row">
+                    <div class="column">
+                        <div style={{ position: "sticky", top: 200, textAlign: "center" }}>
+
+                        </div>
+                    </div>
+                    <div class="main-article-column">
+                        < div >
+
+                            <div style={{ textAlign: "center" }}>
+                                <h1>{posts.title}</h1>
+                                <hr />
+                                <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + posts.timestamp_pretty}</h5></b>
+                                <Image src={posts.image} fluid rounded /><br></br>
+                            </div>
+                            <div
+                                style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
+                                dangerouslySetInnerHTML={{
+                                    __html: posts.body
+                                }}></div>
+                            {/* <PostInput post={post} /> */}
+
+                        </div>
+
+                    </div>
+                    <div class="column" style={{ marginTop: "200px", textAlign: "center" }}>
+                        <div style={{ position: "sticky", top: 200, marginLeft: "40px" }}>
+                            {/* <Image rounded width="200px" src="https://images-na.ssl-images-amazon.com/images/I/71VeUkzTJUL._SY500_.jpg"></Image> */}
+                            <Image rounded width="200px" src="https://riselikeair.files.wordpress.com/2017/11/244036-today-is-a-good-day-to-have-a-great-day-cute-quote.jpg?w=371&h=369"></Image>
+                        </div>
+                    </div>
                 </div>
-            </Jumbotron>
-
-
-        </div>
+            </div>
+        </div >
     )
 }
 

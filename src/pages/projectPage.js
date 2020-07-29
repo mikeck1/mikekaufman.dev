@@ -19,8 +19,10 @@ const BlogArticle = ({ match, location }) => {
             <Header />
 
             <div >
-                <Jumbotron fluid>
+                <Jumbotron >
                     <h1 style={{ textAlign: "center" }}>{projects.title}</h1>
+                    <hr />
+                    <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + projects.timestamp_pretty}</h5></b>
                     <div style={{ textAlign: "center", marginBottom: "15px" }}><Image src={projects.image} fluid rounded /></div>
 
 

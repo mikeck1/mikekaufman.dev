@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "../components/header";
-import { Jumbotron, Image, Form, Button, Toast, Accordion, Card } from "react-bootstrap";
+import { Jumbotron, Image, Form, Button, Accordion, Card } from "react-bootstrap";
 import 'firebase/firestore';
 import db from '../utils/firebase';
 import { PostInput } from '../components/PostInput';
@@ -37,7 +37,7 @@ function Admin() {
     React.useEffect(() => {
         const fetchData = async () => {
             const dbb = db.firestore()
-            const data = await dbb.collection("posts").get()
+            const data = await dbb.collection("posts").orderBy("timestamp", "desc").get()
             setPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
         }
         fetchData()
@@ -46,8 +46,12 @@ function Admin() {
     const onCreate = () => {
         const dbb = db.firestore()
         console.log(localPost)
-        dbb.collection('posts').add({ title: localPost.title, image: localPost.image, body: localPost.body })
+        dbb.collection('posts').add({ title: localPost.title, image: localPost.image, body: localPost.body, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
+
+    const timestamp = Date.now();
+    console.log(timestamp)
+    const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
 
     return (
         <>

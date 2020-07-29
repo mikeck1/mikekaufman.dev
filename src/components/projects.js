@@ -8,7 +8,7 @@ const Projects = (props) => {
     React.useEffect(() => {
         const fetchData = async () => {
             const dbb = db.firestore()
-            const data = await dbb.collection("projects").get()
+            const data = await dbb.collection("projects").orderBy("timestamp", "desc").get()
             setProjects(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
         }
         fetchData()

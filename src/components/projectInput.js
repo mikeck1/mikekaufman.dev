@@ -2,14 +2,15 @@ import React from 'react'
 import RichTextEditor from 'react-rte';
 import db from "../utils/firebase"
 import { Button, Jumbotron, Form } from "react-bootstrap"
+
+
+import EditorConvertToHTML from "../components/richTextEditor"
 export const ProjectInput = ({ post }) => {
-    const [title, setTitle] = React.useState(post.title)
-    const onUpdate = () => {
-        db.firestore().collection("posts").doc(post.id).set({ ...post, title })
-    }
+
+
 
     const onDelete = () => {
-        db.firestore().collection("posts").doc(post.id).delete()
+        db.firestore().collection("projects").doc(post.id).delete()
     }
     const [project, setProject] = React.useState(post)
     const [localProject, _updateLocalProject] = React.useState(post)
@@ -38,9 +39,13 @@ export const ProjectInput = ({ post }) => {
     const onCreate = () => {
         const dbb = db.firestore()
         console.log(localProject)
-        const b = localProject.body
-        dbb.collection('projects').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id })
+        dbb.collection('projects').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
+
+    const timestamp = Date.now();
+    console.log(timestamp)
+    const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
+
 
     return (
         <>
@@ -55,6 +60,9 @@ export const ProjectInput = ({ post }) => {
                     </Form.Group>
                     <Form.Group controlId="formBasicBody">
                         <Form.Label>Body</Form.Label>
+                        <div style={{ backgroundColor: "white" }}>
+                            <EditorConvertToHTML body={post} callback={onCreate} onChange={handleChange} />
+                        </div>
                         <RichTextEditor
                             defaultValue={post.body}
                             value={editorValue}
