@@ -1,30 +1,53 @@
 import React from 'react'
-import RichTextEditor from 'react-rte';
+// import RichTextEditor from 'react-rte';
 import db from "../utils/firebase"
 import { Button, Jumbotron, Form } from "react-bootstrap"
+import MEDitor from "@uiw/react-md-editor";
 export const PostInput = ({ post }) => {
     // const [title, setTitle] = React.useState(post.title)
     // const onUpdate = () => {
     //     db.firestore().collection("posts").doc(post.id).set({ ...post, title })
     // }
-
+    const [body, setBody] = React.useState(post.body);
     const onDelete = () => {
         db.firestore().collection("posts").doc(post.id).delete()
     }
     const [project, setProject] = React.useState(post)
     const [localProject, _updateLocalProject] = React.useState(post)
 
+    const mkdStr = `# Markdown Editor for React
 
-    const [editorValue, setEditorValue] =
-        React.useState(RichTextEditor.createValueFromString(post.body, 'html'));
+**Hello world!!!**
 
-    const handleChange = value => {
-        setEditorValue(value);
-        setProject(value.toString("html"));
-        console.log(value._cache.html)
-        updateLocalPost({ ...localProject, body: value._cache.html })
-        console.log({ title: localProject.title, image: localProject.image, body: localProject.body })
-    };
+\`\`\`javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import MEDitor from '@uiw/react-md-editor';
+
+export default function App() {
+  const [value, setValue] = React.useState("**Hello world!!!**");
+  return (
+    <div className="container">
+      <MEDitor
+        value={value}
+        onChange={setValue}
+      />
+      <MDEditor.Markdown source={value} />
+    </div>
+  );
+}
+\`\`\`
+`;
+    // const [editorValue, setEditorValue] =
+    //     React.useState(RichTextEditor.createValueFromString(post.body, 'html'));
+
+    // const handleChange = value => {
+    //     setEditorValue(value);
+    //     setProject(value.toString("html"));
+    //     console.log(value._cache.html)
+    //     updateLocalPost({ ...localProject, body: value._cache.html })
+    //     console.log({ title: localProject.title, image: localProject.image, body: localProject.body })
+    // };
 
     const updateLocalPost = u => {
         _updateLocalProject(u)
@@ -38,7 +61,7 @@ export const PostInput = ({ post }) => {
     const onCreate = () => {
         const dbb = db.firestore()
         console.log(localProject)
-        dbb.collection('posts').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: localProject.body, id: localProject.id, timestamp: timestamp, timestamp_pretty: dt_pretty })
+        dbb.collection('posts').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: body, id: localProject.id, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
 
     const timestamp = Date.now();
@@ -59,7 +82,12 @@ export const PostInput = ({ post }) => {
                     </Form.Group>
                     <Form.Group controlId="formBasicBody">
                         <Form.Label>Body</Form.Label>
-                        <RichTextEditor
+                        <div className="container" style={{ width: "100%" }}>
+                            <MEDitor height={600} width={"100%"} value={body} onChange={setBody} />
+                            <div style={{ padding: "50px 0 0 0" }} />
+                            {/* <MEDitor.Markdown source={body} /> */}
+                        </div>
+                        {/* <RichTextEditor
                             defaultValue={post.body}
                             value={editorValue}
                             onChange={handleChange}
@@ -70,7 +98,7 @@ export const PostInput = ({ post }) => {
                             multiline
                             variant="filled"
                             style={{ minHeight: 410 }}
-                        />
+                        /> */}
                         {/* <Form.Control as="textarea" type="body" rows="10" defaultValue={post.body} value={localProject.body} onChange={e => updateLocalPost({ ...localProject, body: e.target.value })} />
                         <Form.Text className="text-muted">
                             This takes HTML

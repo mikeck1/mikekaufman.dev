@@ -4,22 +4,23 @@ import { Image } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import 'firebase/firestore';
 import db from '../utils/firebase';
-import marked from "marked";
-import Highlight from "../components/Highlight"
-import hljs from "highlight.js";
+// import marked from "marked";
+// import Highlight from "../components/Highlight"
+// import hljs from "highlight.js";
 import "../App.css"
 import 'highlight.js/styles/vs2015.css';
+import MEDitor from "@uiw/react-md-editor";
 function Posts() {
     const [posts, setPosts, post, localPost, _updateLocalPost]
         = React.useState([])
-    hljs.configure({ useBR: true });
-    marked.setOptions({
+    // hljs.configure({ useBR: true });
+    // marked.setOptions({
 
-        langPrefix: "hljs language-",
-        highlight: function (code) {
-            return hljs.highlightAuto(code, ["html", "javascript"]).value;
-        }
-    });
+    //     langPrefix: "hljs language-",
+    //     highlight: function (code) {
+    //         return hljs.highlightAuto(code, ["html", "javascript"]).value;
+    //     }
+    // });
 
     const updateLocalPost = u => {
         _updateLocalPost(u)
@@ -67,8 +68,9 @@ function Posts() {
                                     <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + post.timestamp_pretty}</h5></b>
                                     <LinkContainer to={"/blog/" + post.id} ><Image src={post.image} fluid rounded /></LinkContainer><br></br>
                                 </div>
+                                <MEDitor.Markdown source={post.body} />
                                 {/* <div dangerouslySetInnerHTML={{ __html: marked(post.body) }} /> */}
-                                < Highlight body={post.body} />
+                                {/* < Highlight body={post.body} /> */}
                                 {/* <div
                                     style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
                                     dangerouslySetInnerHTML={{

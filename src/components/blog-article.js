@@ -2,6 +2,7 @@ import React from 'react';
 import db from '../utils/firebase';
 import { Image, Jumbotron } from 'react-bootstrap';
 import Header from "../components/header";
+import MEDitor from "@uiw/react-md-editor";
 const BlogArticle = ({ match, location }) => {
     const blogID = match.params.blogID;
     const [posts, setPosts]
@@ -33,11 +34,12 @@ const BlogArticle = ({ match, location }) => {
                                 <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + posts.timestamp_pretty}</h5></b>
                                 <Image src={posts.image} fluid rounded /><br></br>
                             </div>
-                            <div
+                            <MEDitor.Markdown source={posts.body} />
+                            {/* <div
                                 style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
                                 dangerouslySetInnerHTML={{
                                     __html: posts.body
-                                }}></div>
+                                }}></div> */}
                             {/* <PostInput post={post} /> */}
 
                         </div>
