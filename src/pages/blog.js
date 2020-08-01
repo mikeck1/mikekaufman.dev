@@ -62,21 +62,13 @@ function Posts() {
                         {posts.map(post => (
                             < div >
 
-                                <div style={{ textAlign: "center" }}>
-                                    <a href={"/blog/" + post.id}><h1>{post.title}</h1></a>
+                                <div style={{ marginBottom: "100px", marginTop: "60px" }}>
+                                    <a href={"/blog/" + post.id}><h2>{post.title}</h2></a>
                                     <hr />
                                     <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + post.timestamp_pretty}</h5></b>
                                     <LinkContainer to={"/blog/" + post.id} ><Image src={post.image} fluid rounded /></LinkContainer><br></br>
                                 </div>
-                                <MEDitor.Markdown source={post.body} />
-                                {/* <div dangerouslySetInnerHTML={{ __html: marked(post.body) }} /> */}
-                                {/* < Highlight body={post.body} /> */}
-                                {/* <div
-                                    style={{ width: "100%", height: "100%", overflow: "hidden", objectFit: "cover" }}
-                                    dangerouslySetInnerHTML={{
-                                        __html: post.body
-                                    }}></div> */}
-                                {/* <PostInput post={post} /> */}
+                                {/* <MEDitor.Markdown source={post.body} /> */}
 
                             </div>
                         ))

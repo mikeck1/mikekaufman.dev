@@ -13,6 +13,18 @@
   margin: auto;
 }
 
+.navbar-brand
+{
+  font-family: 'Economica', sans-serif;
+  color:grey;
+  font-size: 22px;
+  margin: 0px;
+}
+
+
+
+
+
 
 .App-header {
   background-color: #282c34;

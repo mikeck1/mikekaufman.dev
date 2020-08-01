@@ -18,7 +18,7 @@ const TableTile = ({ user }) => {
                 <Card.Img style={{ width: "100%", height: "100%", position: "absolute", overflow: "hidden", objectFit: "cover" }} variant="top" src={user.image} />
                 <Card.Body style={{ marginTop: "100px", padding: "20px" }}>
                     <ListGroup className="list-group-flush">
-                        <ListGroupItem><Card.Title style={{ textAlign: "left", fontFamily: "monospace", height: "40px" }}><b>{user.title}</b></Card.Title></ListGroupItem>
+                        <ListGroupItem><Card.Title style={{ textAlign: "left", height: "40px" }}><b>{user.title}</b></Card.Title></ListGroupItem>
                         <ListGroupItem>
                             <LinkContainer to={"/projects/" + user.id} ><Button variant="warning">View Project</Button></LinkContainer>
                         </ListGroupItem>

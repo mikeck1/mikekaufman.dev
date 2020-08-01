@@ -112,7 +112,7 @@ export default function App() {
                         </Form.Text>
                     </Form.Group>
                     <Button variant="primary" className="save" onClick={onCreate}>
-                        Submit
+                        Update
                                     </Button>
                 </Form>
             </Jumbotron>
