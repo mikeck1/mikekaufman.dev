@@ -37,7 +37,7 @@ export default function App() {
     const [body, setBody] = React.useState(mkdStr);
     const [projects, setProjects] = React.useState([])
 
-    const [project, setProject] = React.useState()
+    const [project, ] = React.useState()
     const [localProject, _updateLocalProject] = React.useState(0)
 
     // // const [editorState, setEditor] = React.useState()
@@ -46,21 +46,11 @@ export default function App() {
     // const [editorValue, _setEditorValue] =
     //     React.useState(RichTextEditor.createValueFromString(localProject.body, 'html'));
 
-    const handleChange = value => {
-        setProject(value.toString("html"));
-        console.log(value._cache.html)
-        updateLocalPost({ ...localProject, body: value._cache.html })
-    };
 
     const updateLocalPost = u => {
         _updateLocalProject(u)
         console.log(u)
     }
-
-    // const setEditorValue = u => {
-    //     _setEditorValue(u)
-    //     console.log(u)
-    // }
 
     if (localProject === null) {
         if (project !== null)
@@ -78,27 +68,12 @@ export default function App() {
 
     const onCreate = () => {
         const timestamp = Date.now();
-        // this.props.onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())))
         const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
         const dbb = db.firestore()
         console.log(localProject)
         dbb.collection('projects').add({ title: localProject.title, image: localProject.image, body: body, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
 
-    // const onEditorStateChange = e_state => {
-    //     const timestamp = Date.now();
-    //     // this.props.onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())))
-    //     const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
-    //     // console.log({ title: "mkkj", image: "kl", body: draftToHtml(convertToRaw(editorState.getCurrentContent())), timestamp: timestamp, timestamp_pretty: dt_pretty });
-    //     console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
-    //     // console.log(draftToHtml(editorState))
-    //     editorState = e_state;
-
-    // };
-
-    const timestamp = Date.now();
-    console.log(timestamp)
-    const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
 
     // const date_pretty = dt_pretty.substring(0, 10);
     // const time_pretty = dt_pretty.substring(13, 23);

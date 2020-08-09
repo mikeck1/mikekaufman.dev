@@ -11,7 +11,7 @@ import MEDitor from "@uiw/react-md-editor";
 function Admin() {
     const [posts, setPosts] = React.useState([])
 
-    const [post, setPost] = React.useState()
+    const [post] = React.useState()
     const [localPost, _updateLocalPost] = React.useState(0)
     const mkdStr = `# Markdown Editor for React
 

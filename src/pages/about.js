@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/header';
 import MEDitor from "@uiw/react-md-editor";
-const markdown = `# Markdown Editor for React
+const markdown = `# About
 
 I'm a computer engineering student at University of California, San Diego. I'm currently a Software Engineer Intern at Northrop Grumman and planned to graduate after winter quarter of 2021. I enjoy skateboarding, skiing, and golf.
 
@@ -18,14 +18,14 @@ const About = () => {
         <div>
             <Header />
             <div style={{ width: "95%" }}>
-                <div class="row">
-                    <div class="column">
+                <div className="row">
+                    <div className="column">
 
                     </div>
-                    <div class="main-column" style={{ marginTop: "40px" }}>
+                    <div className="main-column" style={{ marginTop: "40px" }}>
                         <MEDitor.Markdown source={markdown} />
                     </div>
-                    <div class="column">
+                    <div className="column">
                     </div>
                 </div>
             </div>

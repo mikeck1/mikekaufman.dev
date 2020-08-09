@@ -4,50 +4,16 @@ import db from "../utils/firebase"
 import { Button, Jumbotron, Form } from "react-bootstrap"
 import MEDitor from "@uiw/react-md-editor";
 export const PostInput = ({ post }) => {
-    // const [title, setTitle] = React.useState(post.title)
-    // const onUpdate = () => {
-    //     db.firestore().collection("posts").doc(post.id).set({ ...post, title })
-    // }
+
     const [body, setBody] = React.useState(post.body);
     const onDelete = () => {
         db.firestore().collection("posts").doc(post.id).delete()
     }
-    const [project, setProject] = React.useState(post)
+    const [project,] = React.useState(post)
     const [localProject, _updateLocalProject] = React.useState(post)
 
-    const mkdStr = `# Markdown Editor for React
 
-**Hello world!!!**
 
-\`\`\`javascript
-import React from "react";
-import ReactDOM from "react-dom";
-import MEDitor from '@uiw/react-md-editor';
-
-export default function App() {
-  const [value, setValue] = React.useState("**Hello world!!!**");
-  return (
-    <div className="container">
-      <MEDitor
-        value={value}
-        onChange={setValue}
-      />
-      <MDEditor.Markdown source={value} />
-    </div>
-  );
-}
-\`\`\`
-`;
-    // const [editorValue, setEditorValue] =
-    //     React.useState(RichTextEditor.createValueFromString(post.body, 'html'));
-
-    // const handleChange = value => {
-    //     setEditorValue(value);
-    //     setProject(value.toString("html"));
-    //     console.log(value._cache.html)
-    //     updateLocalPost({ ...localProject, body: value._cache.html })
-    //     console.log({ title: localProject.title, image: localProject.image, body: localProject.body })
-    // };
 
     const updateLocalPost = u => {
         _updateLocalProject(u)

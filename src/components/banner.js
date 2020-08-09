@@ -42,7 +42,7 @@ function Banner() {
 
                 <br></br><h1 style={{ color: "white", marginTop: "20px" }}>Hello, world!</h1>
                 <p style={{ color: "white" }}>
-                    I made this website to help share things I've learned and to meet more poeple in the tech community.
+                    I made this website to help share things I've learned and to meet more people in the tech community.
                 </p>
                 <p>
                     <OverlayTrigger trigger="click" placement="auto" overlay={popover}>

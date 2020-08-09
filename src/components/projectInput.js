@@ -7,34 +7,11 @@ import MEDitor from "@uiw/react-md-editor";
 // import EditorConvertToHTML from "../components/richTextEditor"
 export const ProjectInput = ({ post }) => {
 
-    const mkdStr = `# Markdown Editor for React
-
-**Hello world!!!**
-
-\`\`\`javascript
-import React from "react";
-import ReactDOM from "react-dom";
-import MEDitor from '@uiw/react-md-editor';
-
-export default function App() {
-  const [value, setValue] = React.useState("**Hello world!!!**");
-  return (
-    <div className="container">
-      <MEDitor
-        value={value}
-        onChange={setValue}
-      />
-      <MDEditor.Markdown source={value} />
-    </div>
-  );
-}
-\`\`\`
-`;
     const [body, setBody] = React.useState(post.body);
     const onDelete = () => {
         db.firestore().collection("projects").doc(post.id).delete()
     }
-    const [project, setProject] = React.useState(post)
+    const [project,] = React.useState(post)
     const [localProject, _updateLocalProject] = React.useState(post)
 
 

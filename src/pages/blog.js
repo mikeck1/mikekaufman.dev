@@ -9,7 +9,6 @@ import db from '../utils/firebase';
 // import hljs from "highlight.js";
 import "../App.css"
 import 'highlight.js/styles/vs2015.css';
-import MEDitor from "@uiw/react-md-editor";
 function Posts() {
     const [posts, setPosts, post, localPost, _updateLocalPost]
         = React.useState([])
@@ -54,13 +53,15 @@ function Posts() {
         <div style={{ width: "100%" }}>
             <Header />
             <div style={{ width: "95%" }}>
-                <div class="row">
-                    <div class="column">
+                <div className="row">
+                    <div className="column">
 
                     </div>
-                    <div class="main-column">
+                    <div className="main-column">
+                        <div>
+                        </div>
                         {posts.map(post => (
-                            < div >
+                            < div key={post.id}>
 
                                 <div style={{ marginBottom: "100px", marginTop: "60px" }}>
                                     <a href={"/blog/" + post.id}><h2>{post.title}</h2></a>
@@ -74,7 +75,7 @@ function Posts() {
                         ))
                         }
                     </div>
-                    <div class="column">
+                    <div className="column">
                     </div>
                 </div>
             </div>

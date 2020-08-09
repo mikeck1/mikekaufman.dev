@@ -14,12 +14,14 @@ import Admin from "./pages/admin";
 import BlogArticle from "./components/blog-article";
 import ProjectPage from "./pages/projectPage";
 import Tracker from "./utils/tracker";
+
 function inititalizeAnalytics() {
     ReactGA.initialize("UA-173663121-1")
     ReactGA.pageview(window.location.pathname + window.location.search);
 }
 
 const Router = () => {
+
     inititalizeAnalytics()
     return (
         <AuthProvider>
