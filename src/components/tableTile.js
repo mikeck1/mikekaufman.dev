@@ -11,7 +11,7 @@ const TableTile = ({ user, label, linkLabel }) => {
                 <Card.Img style={{ width: "100%", height: "100%", position: "absolute", overflow: "hidden", objectFit: "cover" }} variant="top" src={user.image} />
                 <Card.Body style={{ marginTop: "100px", padding: "20px", opacity: .85 }}>
                     <ListGroup className="list-group-flush">
-                        <ListGroupItem><Card.Title style={{ textAlign: "left", height: "40px", opacity: 1 }}><b>{user.title}</b></Card.Title></ListGroupItem>
+                        <ListGroupItem><Card.Title style={{ textAlign: "left", height: "51px", opacity: 1 }}><b>{user.title}</b></Card.Title></ListGroupItem>
                         <ListGroupItem>
                             <LinkContainer to={"/" + linkLabel + "/" + user.id} ><Button variant="warning">View {label}</Button></LinkContainer>
                         </ListGroupItem>

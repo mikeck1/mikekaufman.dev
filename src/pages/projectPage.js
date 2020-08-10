@@ -34,6 +34,7 @@ const BlogArticle = ({ match, location }) => {
     else if (isEmpty(projects)) {
         return "Company list is empty";
     }
+    window.scrollTo(0, 0)
     return (
         <div>
             <Header />

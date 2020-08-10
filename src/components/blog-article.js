@@ -36,6 +36,7 @@ function BlogArticle({ match, location }) {
     else if (isEmpty(posts)) {
         return "Company list is empty";
     }
+    window.scrollTo(0, 0)
     return (
 
         <div style={{ marginBottom: "40px" }}>
