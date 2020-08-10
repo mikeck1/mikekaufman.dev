@@ -3,18 +3,37 @@ import db from '../utils/firebase';
 import { Image, } from 'react-bootstrap';
 import Header from "../components/header";
 import MEDitor from "@uiw/react-md-editor";
+import {
+    useFirestoreConnect,
+    isLoaded,
+    isEmpty
+} from "react-redux-firebase";
+import { useSelector } from "react-redux";
+import 'firebase/firestore';
+
 const BlogArticle = ({ match, location }) => {
     const projectID = match.params.projectID;
-    const [projects, setProjects]
-        = React.useState([])
-    React.useEffect(() => {
-        const fetchData = async () => {
-            const dbb = db.firestore()
-            const data = await dbb.collection("projects").doc(projectID).get()
-            setProjects({ ...data.data(), id: data.id })
-        }
-        fetchData()
-    }, [setProjects, projectID])
+    const FirestoreQuery = {
+        collection: "projects",
+        doc: projectID
+    };
+    useFirestoreConnect(() => [FirestoreQuery]);
+    const projects = useSelector(state => state.firestore.data.projects);
+
+    if (!isLoaded(projects)) {
+        return (
+            <div>
+                <Header />
+                <div style={{ textAlign: "center", marginTop: "150px" }} >
+                    <Image height="270px" width="480px" src="https://media.giphy.com/media/swhRkVYLJDrCE/giphy.gif"></Image>
+                </div>
+            </div>
+        );
+    }
+    // Show a message if there are no todos
+    else if (isEmpty(projects)) {
+        return "Company list is empty";
+    }
     return (
         <div>
             <Header />
@@ -30,12 +49,12 @@ const BlogArticle = ({ match, location }) => {
                     </div>
                     <div className="main-article-column">
                         <div >
-                            <h1 style={{ textAlign: "center" }}>{projects.title}</h1>
+                            <h1 style={{ textAlign: "center" }}>{projects[projectID].title}</h1>
                             <hr />
-                            <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + projects.timestamp_pretty}</h5></b>
-                            <div style={{ textAlign: "center", marginBottom: "15px" }}><Image src={projects.image} fluid rounded /></div>
+                            <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + projects[projectID].timestamp_pretty}</h5></b>
+                            <div style={{ textAlign: "center", marginBottom: "15px" }}><Image src={projects[projectID].image} fluid rounded /></div>
 
-                            <MEDitor.Markdown source={projects.body} />
+                            <MEDitor.Markdown source={projects[projectID].body} />
 
                             {/* <li key={post.title}>{post.title}</li>
                     {post.body} */}

@@ -4,82 +4,47 @@ import { Image } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import 'firebase/firestore';
 import db from '../utils/firebase';
+import ResponsiveTable from "../components/responsive_table";
 // import marked from "marked";
 // import Highlight from "../components/Highlight"
 // import hljs from "highlight.js";
+import MenuBar from './MenuBar'
+import { useSelector } from "react-redux";
+import {
+    useFirestoreConnect,
+    isLoaded,
+    isEmpty
+} from "react-redux-firebase";
 import "../App.css"
 import 'highlight.js/styles/vs2015.css';
+const companiesFirestoreQuery = {
+    collection: "posts",
+    orderBy: ["timestamp", "desc"],
+    limit: 50
+};
+
 function Posts() {
-    const [posts, setPosts, post, localPost, _updateLocalPost]
-        = React.useState([])
-    // hljs.configure({ useBR: true });
-    // marked.setOptions({
-
-    //     langPrefix: "hljs language-",
-    //     highlight: function (code) {
-    //         return hljs.highlightAuto(code, ["html", "javascript"]).value;
-    //     }
-    // });
-
-    const updateLocalPost = u => {
-        _updateLocalPost(u)
-        console.log(u)
+    useFirestoreConnect(() => [companiesFirestoreQuery]);
+    const posts = useSelector(state => state.firestore.ordered.posts);
+    // Show a message while todos are loading
+    if (!isLoaded(posts)) {
+        return (
+            <div>
+                <Header />
+                <div style={{ textAlign: "center", marginTop: "150px" }} >
+                    <Image height="270px" width="480px" src="https://media.giphy.com/media/swhRkVYLJDrCE/giphy.gif"></Image>
+                </div>
+            </div>
+        );
     }
-
-    if (localPost === null) {
-        if (post !== null)
-            updateLocalPost(post)
-
-    }
-
-
-    React.useEffect(() => {
-
-        const fetchData = async () => {
-            const dbb = db.firestore()
-
-            const data = await dbb.collection("posts").orderBy("timestamp", "desc").get()
-
-            setPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-        }
-
-
-        fetchData()
-    }, [setPosts])
-
 
 
     return (
         <div style={{ width: "100%" }}>
             <Header />
-            <div style={{ width: "95%" }}>
-                <div className="row">
-                    <div className="column">
 
-                    </div>
-                    <div className="main-column">
-                        <div>
-                        </div>
-                        {posts.map(post => (
-                            < div key={post.id}>
-
-                                <div style={{ marginBottom: "100px", marginTop: "60px" }}>
-                                    <a href={"/blog/" + post.id}><h2>{post.title}</h2></a>
-                                    <hr />
-                                    <b><h5 style={{ textAlign: "center" }}>{"Written by Michael Kaufman on " + post.timestamp_pretty}</h5></b>
-                                    <LinkContainer to={"/blog/" + post.id} ><Image src={post.image} fluid rounded /></LinkContainer><br></br>
-                                </div>
-                                {/* <MEDitor.Markdown source={post.body} /> */}
-
-                            </div>
-                        ))
-                        }
-                    </div>
-                    <div className="column">
-                    </div>
-                </div>
-            </div>
-        </div>
+            <ResponsiveTable projects={posts} label="Post" linkLabel="blog" />
+        </div >
     );
 }
 export default Posts;

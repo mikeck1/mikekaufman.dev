@@ -12,7 +12,7 @@ const Responsive_table = (props) => {
             <Col
                 xs={{ span: 12 }} sm={{ span: 12 }} md={{ span: 6 }}
                 lg={{ span: 6 }} xl={{ span: 4 }} key={note.id}>
-                <TableTile user={note} />
+                <TableTile user={note} label={props.label} linkLabel={props.linkLabel} />
             </Col>
         );
     });
