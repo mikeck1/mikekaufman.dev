@@ -7,13 +7,13 @@ const TableTile = ({ user, label, linkLabel }) => {
 
     return (
         <div>
-            <Card style={{ marginBottom: "8px", position: "flex" }}>
+            <Card style={{ marginBottom: "8px", position: "flex", textAlign: "center" }}>
                 <Card.Img style={{ width: "100%", height: "100%", position: "absolute", overflow: "hidden", objectFit: "cover" }} variant="top" src={user.image} />
-                <Card.Body style={{ marginTop: "100px", padding: "20px", opacity: .85 }}>
+                <Card.Body style={{ marginTop: "100px", paddingLeft: "20px", paddingRight: "20px" }}>
                     <ListGroup className="list-group-flush">
-                        <ListGroupItem><Card.Title style={{ textAlign: "left", height: "51px", opacity: 1 }}><b>{user.title}</b></Card.Title></ListGroupItem>
-                        <ListGroupItem>
-                            <LinkContainer to={"/" + linkLabel + "/" + user.id} ><Button variant="warning">View {label}</Button></LinkContainer>
+                        <ListGroupItem style={{ backgroundColor: "rgba(255, 255, 255, 0.83)" }}><Card.Title style={{ textAlign: "left", height: "75px", opacity: 1, overflow: "hidden" }}><b>{user.title}</b></Card.Title></ListGroupItem>
+                        <ListGroupItem style={{ backgroundColor: "transparent" }}>
+                            <LinkContainer to={"/" + linkLabel + "/" + user.id} ><Button size="lg" variant="warning">View {label}</Button></LinkContainer>
                         </ListGroupItem>
                     </ListGroup>
                 </Card.Body>
