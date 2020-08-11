@@ -36,12 +36,12 @@ function Responsive_table(props) {
         <div style={{ marginLeft: "50px", marginRight: "50px" }}>
             <br></br>
             <div>
-                <Form>
+                {props.label === "Post" ? (<Form>
                     <Form.Group controlId="search.input">
                         <Form.Label>Search</Form.Label>
                         <Form.Control type="search" placeholder="Enter a search.." value={curProjects.search} onChange={e => search(e.target.value)} />
                     </Form.Group>
-                </Form>
+                </Form>) : (<div></div>)}
                 {/* <div style={{ textAlign: "center", marginBottom: "15px" }}>
                     <Button variant="outline-primary">Primary</Button>{' '}
                     <Button variant="outline-secondary">Secondary</Button>{' '}
