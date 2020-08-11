@@ -38,13 +38,25 @@ function Posts() {
         );
     }
 
+    console.log("POSTS: " + posts)
+    if (posts.length > 1) {
+        return (
+            <div style={{ width: "100%" }}>
+                <Header />
 
+                <ResponsiveTable projects={posts} label="Post" linkLabel="blog" />
+            </div >
+        );
+    }
     return (
-        <div style={{ width: "100%" }}>
+        <div>
             <Header />
-
-            <ResponsiveTable projects={posts} label="Post" linkLabel="blog" />
-        </div >
+            <div style={{ textAlign: "center", marginTop: "150px" }} >
+                <div><h3>Syncing with FireStore</h3></div>
+                <Image height="270px" width="480px" src="https://media.giphy.com/media/swhRkVYLJDrCE/giphy.gif"></Image>
+            </div>
+        </div>
     );
+
 }
 export default Posts;

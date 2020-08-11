@@ -8,19 +8,8 @@ import TableTile from "./tableTile";
 function Responsive_table(props) {
     const projects = props.projects;
     const [curProjects, setCurProjects] = React.useState(projects)
-    const FriendTable = curProjects.map(note => {
-        return (
-            <Col
-                xs={{ span: 12 }} sm={{ span: 12 }} md={{ span: 6 }}
-                lg={{ span: 6 }} xl={{ span: 4 }} key={note.id}>
-                <TableTile user={note} label={props.label} linkLabel={props.linkLabel} />
-            </Col>
-        );
-    });
-
 
     const search = (search_term) => {
-
         const nextProjects = projects.map((p) => {
             if (p.body.toLowerCase().includes(search_term.toLowerCase())) {
                 return p
@@ -28,9 +17,9 @@ function Responsive_table(props) {
         }).filter(function (x) {
             return x !== undefined
         });
-        console.log(nextProjects)
         setCurProjects(nextProjects)
     }
+
 
     return (
         <div style={{ marginLeft: "50px", marginRight: "50px" }}>
