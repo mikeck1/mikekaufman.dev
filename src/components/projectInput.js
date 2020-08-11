@@ -28,7 +28,7 @@ export const ProjectInput = ({ post }) => {
 
     const updateLocalPost = u => {
         _updateLocalProject(u)
-        console.log(u)
+        // console.log(u)
     }
     if (localProject === null) {
         if (project !== null)
@@ -37,12 +37,12 @@ export const ProjectInput = ({ post }) => {
 
     const onCreate = () => {
         const dbb = db.firestore()
-        console.log(localProject)
+        // console.log(localProject)
         dbb.collection('projects').doc(localProject.id).set({ title: localProject.title, image: localProject.image, body: body, id: localProject.id, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
 
     const timestamp = Date.now();
-    console.log(timestamp)
+    // console.log(timestamp)
     const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
 
 

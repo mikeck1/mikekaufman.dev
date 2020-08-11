@@ -20,7 +20,6 @@ function Responsive_table(props) {
         setCurProjects(nextProjects)
     }
 
-
     return (
         <div style={{ marginLeft: "50px", marginRight: "50px" }}>
             <br></br>

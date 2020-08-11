@@ -37,7 +37,7 @@ export default function App() {
     const [body, setBody] = React.useState(mkdStr);
     const [projects, setProjects] = React.useState([])
 
-    const [project, ] = React.useState()
+    const [project,] = React.useState()
     const [localProject, _updateLocalProject] = React.useState(0)
 
     // // const [editorState, setEditor] = React.useState()
@@ -49,7 +49,7 @@ export default function App() {
 
     const updateLocalPost = u => {
         _updateLocalProject(u)
-        console.log(u)
+        // console.log(u)
     }
 
     if (localProject === null) {
@@ -70,7 +70,7 @@ export default function App() {
         const timestamp = Date.now();
         const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
         const dbb = db.firestore()
-        console.log(localProject)
+        // console.log(localProject)
         dbb.collection('projects').add({ title: localProject.title, image: localProject.image, body: body, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
 

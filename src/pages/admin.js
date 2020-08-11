@@ -49,7 +49,7 @@ export default function App() {
 
     const updateLocalPost = u => {
         _updateLocalPost(u)
-        console.log(u)
+        // console.log(u)
     }
 
     if (localPost === null) {
@@ -68,12 +68,12 @@ export default function App() {
 
     const onCreate = () => {
         const dbb = db.firestore()
-        console.log(localPost)
+        // console.log(localPost)
         dbb.collection('posts').add({ title: localPost.title, image: localPost.image, body: body, timestamp: timestamp, timestamp_pretty: dt_pretty })
     }
 
     const timestamp = Date.now();
-    console.log(timestamp)
+    // console.log(timestamp)
     const dt_pretty = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
 
     return (

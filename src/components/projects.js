@@ -39,6 +39,16 @@ const Projects = () => {
     //     fetchData()
     // }, [setProjects])
 
+    if (posts.length === 1) {
+        return (
+            <div>
+                <div style={{ textAlign: "center", marginTop: "150px" }} >
+                    <Image height="270px" width="480px" src="https://media.giphy.com/media/swhRkVYLJDrCE/giphy.gif"></Image>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div>
             <ResponsiveTable projects={posts} label="Project" linkLabel="projects" />

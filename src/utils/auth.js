@@ -35,7 +35,7 @@ export const AuthProvider = (props) => {
 
             return db.auth().currentUser.getIdToken()
         }).then(token => {
-            console.log("LOGGING IN" + token)
+            // console.log("LOGGING IN" + token)
             const expiresIn = 60 * 60 * 24 * 1000 * 14;
             const options = { maxAge: expiresIn, httpOnly: false, secure: false };
 
@@ -45,8 +45,8 @@ export const AuthProvider = (props) => {
                 return serverLogin(token)
             }
         }).catch(error => {
-            console.log("Error Logging in!")
-            console.log(error)
+            // console.log("Error Logging in!")
+            // console.log(error)
         })
     }
 

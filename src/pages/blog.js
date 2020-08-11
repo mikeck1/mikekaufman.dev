@@ -38,7 +38,7 @@ function Posts() {
         );
     }
 
-    console.log("POSTS: " + posts)
+    // console.log("POSTS: " + posts)
     if (posts.length > 1) {
         return (
             <div style={{ width: "100%" }}>
