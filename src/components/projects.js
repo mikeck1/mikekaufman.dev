@@ -50,7 +50,8 @@ const Projects = () => {
     }
 
     return (
-        <div>
+        <div style={{ textAlign: "center" }}>
+
             <ResponsiveTable projects={posts} label="Project" linkLabel="projects" />
         </div >
     )
